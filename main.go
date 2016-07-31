@@ -20,6 +20,6 @@ func main() {
 		w.Write([]byte(html.UnescapeString(string(GenPac())))) //这里要将html标记转换回来 不然"会变成&#34;
 	})
 	var port = strconv.Itoa(config.Port)
-	fmt.Printf("pac url is http:127.0.0.1:%s/pac\n", port)
+	fmt.Printf("pac url is http://127.0.0.1:%s/pac\n", port)
 	http.ListenAndServe(":"+port, nil)
 }

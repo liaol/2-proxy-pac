@@ -3,7 +3,6 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"html"
 	"html/template"
 	"strings"
 )
@@ -11,8 +10,8 @@ import (
 func GenPac() []byte {
 	var pacRawTmpl = `
 var direct = 'DIRECT';
-var proxyCN = "{{.Proxy}}";
-var proxyUS = "{{.ProxyDefault}}";
+var proxyCN = "{{.ProxyDefault}}";
+var proxyUS = "{{.ProxyBlock}}";
 
 var directList = [
 "",
@@ -147,14 +146,14 @@ function FindProxyForURL(url, host) {
 
 	buf := new(bytes.Buffer)
 	data := struct {
-		Proxy        string
+		ProxyBlock   string
 		ProxyDefault string
 		DirectList   string
 		BlockList    string
 	}{
 		config.ProxyBlock,
 		config.ProxyDefault,
-		html.UnescapeString(strings.Join(directList, "\",\n\"")),
+		strings.Join(directList, "\",\n\""),
 		strings.Join(blockList, "\",\n\""),
 	}
 

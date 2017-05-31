@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
+	"log"
 	"os"
 	"path"
 	"strings"
@@ -25,10 +26,15 @@ func initConfig() {
 	flag.IntVar(&config.Port, "p", 6789, "port")
 	flag.Parse()
 
+	if config.ProxyBlock == "" || config.ProxyDefault == "" {
+		log.Fatal("请传代理")
+	}
+
 	//默认路径为$HOME/2-proxy-pac
 	if config.ConfigDir == "" {
 		config.ConfigDir = getDefaultConfigDir()
 	}
+
 	//准备配置信息
 	prepareConfigDir()
 

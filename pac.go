@@ -91,6 +91,9 @@ function host2Domain(host) {
 	dot2ndLast = host.lastIndexOf(".", lastDot-1);
 	if (dot2ndLast === -1)
 		return host;
+	
+	//use the top domain
+	return host.substring(dot2ndLast+1);
 
 	var part = host.substring(dot2ndLast+1, lastDot);
 	if (topLevel[part]) {

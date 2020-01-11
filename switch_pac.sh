@@ -1,5 +1,5 @@
 #! /bin/bash
-# 如果在不在公司则切换pac
+# 如果在公司则切换pac
 function SetPac() {
     pac=`/usr/sbin/networksetup -getautoproxyurl Wi-Fi | grep $1 | wc -l`
     if [ $pac -eq 0 ]
